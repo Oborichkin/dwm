@@ -6,8 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Source Code Pro:size:10", "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
-static const char dmenufont[]       = "Source Code Pro:size=10";
+static const char *fonts[]          = { "Space Mono:size:10", "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
+static const char dmenufont[]       = "Space Mono:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -63,10 +63,12 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+#include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,             		XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -99,6 +101,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	// Volume control
+	{ 0, XF86XK_AudioMute,        spawn, SHCMD("pamixer -t; pkill -RTMIN+2 dwmblocks") },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; pkill -RTMIN+2 dwmblocks") },
+	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost -d 2; pkill -RTMIN+2 dwmblocks") },
 };
 
 /* button definitions */
