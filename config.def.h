@@ -101,6 +101,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	// Binary shortcuts
+	{ MODKEY|ShiftMask,		XK_e,	   spawn,	   SHCMD("getmoji") },
 	// Volume control
 	{ 0, XF86XK_AudioMute,        spawn, SHCMD("pamixer -t; pkill -RTMIN+2 dwmblocks") },
 	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; pkill -RTMIN+2 dwmblocks") },
