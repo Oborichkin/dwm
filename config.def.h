@@ -103,10 +103,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	// Binary shortcuts
 	{ MODKEY|ShiftMask,		XK_e,	   spawn,	   SHCMD("getmoji") },
-	// Volume control
+	// Audio control
 	{ 0, XF86XK_AudioMute,        spawn, SHCMD("pamixer -t; pkill -RTMIN+2 dwmblocks") },
 	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; pkill -RTMIN+2 dwmblocks") },
 	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost -d 2; pkill -RTMIN+2 dwmblocks") },
+	// Music control
+	{ 0, XF86XK_AudioPlay, spawn, SHCMD("playerctl play-pause") },
+	{ 0, XF86XK_AudioNext, spawn, SHCMD("playerctl next") },
+	{ 0, XF86XK_AudioPrev, spawn, SHCMD("playerctl previous") },
 };
 
 /* button definitions */
