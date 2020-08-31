@@ -6,8 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Font Awesome 5 Free:size:10", "Space Mono:size:10", "JoyPixels:pixelsize=12:antialias=true:autohint=true" };
-static const char dmenufont[]       = "Space Mono:size=10";
+static const char *fonts[]          = { "unscii:size=12" };
+static const char dmenufont[]       = "unscii:size=12";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -66,7 +66,7 @@ static const char *termcmd[]  = { "st", NULL };
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          SHCMD("rofi -show run") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,             		XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -110,9 +110,9 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; pkill -RTMIN+2 dwmblocks") },
 	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost -d 2; pkill -RTMIN+2 dwmblocks") },
 	// Music control
-	{ 0, XF86XK_AudioPlay, spawn, SHCMD("playerctl play-pause") },
-	{ 0, XF86XK_AudioNext, spawn, SHCMD("playerctl next") },
-	{ 0, XF86XK_AudioPrev, spawn, SHCMD("playerctl previous") },
+	{ 0, XF86XK_AudioPlay, spawn, SHCMD("playerctl play-pause; pkill -RTMIN+4 dwmblocks") },
+	{ 0, XF86XK_AudioNext, spawn, SHCMD("playerctl next; pkill -RTMIN+4 dwmblocks") },
+	{ 0, XF86XK_AudioPrev, spawn, SHCMD("playerctl previous; pkill -RTMIN+4 dwmblocks") },
 };
 
 /* button definitions */
